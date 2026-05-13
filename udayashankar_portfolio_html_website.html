@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UdayaShankar Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #050505;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    nav {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .logo span {
+      color: #7c7c7c;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #8e8e8e;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: radial-gradient(circle at top, #1a1a1a, #050505 60%);
+      padding-top: 100px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #8a8a8a;
+    }
+
+    .hero p {
+      color: #cfcfcf;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: white;
+      color: black;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #444;
+      color: white;
+    }
+
+    .hero-card {
+      height: 500px;
+      border-radius: 30px;
+      background: linear-gradient(to bottom, #1d1d1d, #090909);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.15), transparent 50%);
+    }
+
+    .hero-card-content {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+    }
+
+    .hero-card h2 {
+      font-size: 5rem;
+      color: rgba(255,255,255,0.08);
+    }
+
+    section {
+      padding: 120px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .section-title {
+      margin-bottom: 60px;
+    }
+
+    .section-title p {
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      color: #888;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+    }
+
+    .section-title h2 {
+      font-size: 3rem;
+      max-width: 800px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 60px;
+    }
+
+    .about-text p {
+      line-height: 2;
+      color: #c7c7c7;
+      margin-bottom: 25px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: #101010;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 50px;
+      align-items: stretch;
+    }
+
+    .project-card {
+      background: #0f0f0f;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.4s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-content {
+      padding: 35px;
+    }
+
+    .project-content h3 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .project-content p {
+      color: #bdbdbd;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      background: #171717;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+    }
+
+    .contact {
+      text-align: center;
+    }
+
+    .contact p {
+      color: #bdbdbd;
+      max-width: 700px;
+      margin: 20px auto 40px;
+      line-height: 1.8;
+    }
+
+    footer {
+      padding: 40px 0;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      color: #8b8b8b;
+    }
+
+    @media(max-width:1100px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media(max-width:768px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card img {
+        height: 240px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-content">
+      <div class="logo">Port<span>folio</span></div>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>Udaya <span>Shankar</span></h1>
+
+        <p>
+          Gameplay Programmer and Technical Developer focused on Unity systems,
+          simulations, gameplay mechanics, optimization, shaders, editor tools,
+          and immersive interactive experiences.
+        </p>
+
+        <div class="buttons">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-title">
+        <p>About Me</p>
+        <h2>Building immersive experiences through gameplay and technology.</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm UdayaShankar. My journey into game and software development began at Seamedu Pune, where I completed my BCA with a specialization in game development.
+          </p>
+
+          <p>
+            I worked at Vr2ality Pune and later at Immersivevision Technology, contributing to educational and simulation projects like Simulab and Cadaviz.
+          </p>
+        </div>
+
+        <div class="about-text">
+          <p>
+            My expertise includes gameplay programming, parkour mechanics, optimization, shaders, editor tools, AI systems, and simulation frameworks.
+          </p>
+
+          <p>
+            I enjoy analyzing gameplay systems deeply and creating immersive mechanics that combine creativity with strong technical execution.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="section-title">
+        <p>Skills</p>
+        <h2>Technical Expertise</h2>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">Unity 2D & 3D</div>
+        <div class="skill-card">Unreal Blueprints</div>
+        <div class="skill-card">C#</div>
+        <div class="skill-card">Python</div>
+        <div class="skill-card">Gameplay Programming</div>
+        <div class="skill-card">Optimization</div>
+        <div class="skill-card">Editor Tools</div>
+        <div class="skill-card">Shaders</div>
+        <div class="skill-card">Animation Systems</div>
+        <div class="skill-card">Git & SVN</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-title">
+        <p>Projects</p>
+        <h2>Featured Work</h2>
+      </div>
+
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <img src="Images/Cadaviz.png" alt="Cadaviz">
+          <div class="project-content">
+            <h3>Cadaviz</h3>
+            <p>
+              Advanced anatomy learning platform featuring interactive dissection systems, student dashboards, draw tools, optimization pipelines, and immersive anatomical exploration.
+            </p>
+            <div class="tags">
+              <div class="tag">Unity</div>
+              <div class="tag">Medical</div>
+              <div class="tag">Optimization</div>
+              <div class="tag">Education</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="Images/Simulab.PNG" alt="Simulab">
+          <div class="project-content">
+            <h3>Simulab</h3>
+            <p>
+              Virtual science laboratory platform with 30+ Biology, Physics, and Chemistry experiments featuring circuitry systems, fluid simulations, APIs, and save/load frameworks.
+            </p>
+            <div class="tags">
+              <div class="tag">Unity</div>
+              <div class="tag">Physics</div>
+              <div class="tag">Chemistry</div>
+              <div class="tag">Simulation</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="Images/Bount punk.png" alt="Bounty Punk">
+          <div class="project-content">
+            <h3>Bounty Punk</h3>
+            <p>
+              Futuristic cyberpunk top-down shooter featuring boss fights, combat systems, neon environments, shaders, sound design, and gameplay mechanics.
+            </p>
+            <div class="tags">
+              <div class="tag">Cyberpunk</div>
+              <div class="tag">Shooter</div>
+              <div class="tag">Lighting</div>
+              <div class="tag">Gameplay</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="Images/Wolf Stealth.png" alt="Wolf Stealth">
+          <div class="project-content">
+            <h3>Wolf Stealth</h3>
+            <p>
+              Dark stealth survival game where players survive as a werewolf using sound-based stealth mechanics while avoiding zombie AI detection.
+            </p>
+            <div class="tags">
+              <div class="tag">Unreal</div>
+              <div class="tag">Stealth</div>
+              <div class="tag">AI</div>
+              <div class="tag">Horror</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="Images/The Invasion.png" alt="The Invasion">
+          <div class="project-content">
+            <h3>The Invasion</h3>
+            <p>
+              Retro-style 2D platformer with enemy AI pathing, shooting systems, coins, lives management, and handcrafted tile-based levels.
+            </p>
+            <div class="tags">
+              <div class="tag">2D</div>
+              <div class="tag">Platformer</div>
+              <div class="tag">Retro</div>
+              <div class="tag">Gameplay</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="Images/Grammar Fishing.png" alt="Grammar Fishing">
+          <div class="project-content">
+            <h3>Grammar Fishing</h3>
+            <p>
+              Educational casual fishing game where players catch the correct answers from the pond and return them back to land.
+            </p>
+            <div class="tags">
+              <div class="tag">Education</div>
+              <div class="tag">Casual</div>
+              <div class="tag">Kids</div>
+              <div class="tag">Learning</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="Images/Quiz Driver.png" alt="Quiz Driver">
+          <div class="project-content">
+            <h3>Quiz Driver</h3>
+            <p>
+              Endless driving quiz game where players collect correct answers while avoiding wrong answers, coins, and obstacles.
+            </p>
+            <div class="tags">
+              <div class="tag">Driving</div>
+              <div class="tag">Quiz</div>
+              <div class="tag">Endless</div>
+              <div class="tag">Mobile</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="Images/Block Breaker.jpg" alt="Block Breaker">
+          <div class="project-content">
+            <h3>Block Breaker</h3>
+            <p>
+              Classic 2D block breaker game featuring enhanced bounce physics, progressive destruction systems, and visual damage feedback.
+            </p>
+            <div class="tags">
+              <div class="tag">Arcade</div>
+              <div class="tag">2D</div>
+              <div class="tag">Physics</div>
+              <div class="tag">Classic</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="Images/World Driving.png" alt="World Driving">
+          <div class="project-content">
+            <h3>World Driving</h3>
+            <p>
+              Fully functional custom vehicle system created without wheel colliders featuring acceleration, braking, reverse mechanics, and realistic speed calculations.
+            </p>
+            <div class="tags">
+              <div class="tag">Vehicles</div>
+              <div class="tag">Physics</div>
+              <div class="tag">Driving</div>
+              <div class="tag">Systems</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="Images/Parkour Mechanic.png" alt="Parkour Mechanic">
+          <div class="project-content">
+            <h3>Parkour Mechanic</h3>
+            <p>
+              Advanced reusable third-person parkour system with target matching, humanoid retargeting, traversal mechanics, and scalable animation workflows.
+            </p>
+            <div class="tags">
+              <div class="tag">Parkour</div>
+              <div class="tag">Animation</div>
+              <div class="tag">Traversal</div>
+              <div class="tag">Controller</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  
+
+  <footer>
+    © 2026 UdayaShankar • Portfolio Website
+  </footer>
+
+</body>
+</html>
