@@ -6,633 +6,956 @@
   <title>UdayaShankar Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
   <style>
+    :root {
+      --bg: #050505;
+      --panel: #0f0f0f;
+      --panel-2: #101010;
+      --line: rgba(255,255,255,0.08);
+      --muted: #9c9c9c;
+      --accent: #ffffff;
+      --red: #ff3b3b;
+      --red-soft: rgba(255,59,59,0.15);
+      --script: 'Clicker Script', cursive;
+      --sidebar-w: 270px;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Poppins', sans-serif;
-      background: #050505;
+      background: var(--bg);
       color: white;
       overflow-x: hidden;
     }
 
-    html {
-      scroll-behavior: smooth;
+    a { text-decoration: none; color: inherit; }
+
+    /* ---------------- Sidebar ---------------- */
+    .aside {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: #0a0a0a;
+      border-right: 1px solid var(--line);
+      padding: 40px 30px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      transition: 0.4s;
+    }
+
+    .aside .logo {
+      font-family: var(--script);
+      font-size: 2.6rem;
+      font-weight: 400;
+      margin-bottom: 50px;
+      line-height: 1;
+    }
+
+    .aside .logo span { color: var(--red); }
+
+    .aside .nav { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+    .aside .nav li a {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 13px 16px;
+      border-radius: 12px;
+      color: #cfcfcf;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .aside .nav li a i { width: 20px; text-align: center; color: var(--muted); transition: 0.3s; }
+
+    .aside .nav li a:hover,
+    .aside .nav li a.active {
+      background: #161616;
+      color: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .aside .nav li a.active { border-color: rgba(255,59,59,0.4); box-shadow: inset 3px 0 0 var(--red); }
+
+    .aside .nav li a:hover i { color: #fff; }
+    .aside .nav li a.active i { color: var(--red); }
+
+    .aside .side-foot {
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* mobile toggler */
+    .nav-toggler {
+      position: fixed;
+      top: 22px;
+      right: 22px;
+      z-index: 1100;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #161616;
+      border: 1px solid var(--line);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: #fff;
+    }
+
+    /* ---------------- Main ---------------- */
+    .main-content {
+      margin-left: var(--sidebar-w);
+      transition: 0.4s;
     }
 
     .container {
       width: 90%;
-      max-width: 1300px;
+      max-width: 1150px;
       margin: auto;
     }
 
-    nav {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .nav-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-    }
-
-    .logo {
-      font-size: 1.6rem;
-      font-weight: 700;
-    }
-
-    .logo span {
-      color: #7c7c7c;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 30px;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: white;
-      transition: 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: #8e8e8e;
-    }
-
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      background: radial-gradient(circle at top, #1a1a1a, #050505 60%);
-      padding-top: 100px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 60px;
-      align-items: center;
-    }
-
-    .hero h1 {
-      font-size: 5rem;
-      line-height: 1;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      color: #8a8a8a;
-    }
-
-    .hero p {
-      color: #cfcfcf;
-      line-height: 1.8;
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 15px 30px;
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
-      text-decoration: none;
-    }
-
-    .btn-primary {
-      background: white;
-      color: black;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid #444;
-      color: white;
-    }
-
-    .hero-card {
-      height: 500px;
-      border-radius: 30px;
-      background: linear-gradient(to bottom, #1d1d1d, #090909);
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .hero-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(255,255,255,0.15), transparent 50%);
-    }
-
-    .hero-card-content {
-      position: absolute;
-      bottom: 40px;
-      left: 40px;
-    }
-
-    .hero-card h2 {
-      font-size: 5rem;
-      color: rgba(255,255,255,0.08);
-    }
-
     section {
-      padding: 120px 0;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .section-title {
-      margin-bottom: 60px;
+      min-height: 100vh;
+      padding: 90px 0;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .section-title p {
       text-transform: uppercase;
       letter-spacing: 5px;
-      color: #888;
+      color: var(--red);
       margin-bottom: 10px;
       font-size: 0.8rem;
+      font-weight: 600;
     }
 
     .section-title h2 {
-      font-size: 3rem;
-      max-width: 800px;
+      font-size: 2.8rem;
+      margin-bottom: 50px;
     }
 
-    .about-grid {
+    /* ---------------- Home ---------------- */
+    .home {
+      background:
+        radial-gradient(circle at 78% 30%, rgba(255,59,59,0.10), transparent 42%),
+        radial-gradient(circle at 30% 20%, #1a1a1a, #050505 60%);
+    }
+
+    .home-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: 1.3fr 1fr;
       gap: 60px;
+      align-items: center;
     }
 
-    .about-text p {
-      line-height: 2;
-      color: #c7c7c7;
-      margin-bottom: 25px;
+    .home-info .hello { font-size: 1.1rem; color: #cfcfcf; margin-bottom: 6px; font-weight: 400; }
+    .home-info .hello span { font-family: var(--script); font-size: 2.6rem; color: var(--red); font-weight: 400; margin-left: 4px; }
+
+    .home-info h1 {
+      font-size: 4.2rem;
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+    .home-info h1 span { color: #8a8a8a; }
+
+    .home-info .profession { font-size: clamp(1.15rem, 5vw, 2.3rem); line-height: 1.2; color: #d0d0d0; margin: 6px 0 24px; font-weight: 700; white-space: nowrap; }
+    .home-info .profession .typing { color: #fff; }
+
+    .home-info p {
+      color: #bdbdbd;
+      line-height: 1.9;
+      max-width: 560px;
+      margin-bottom: 32px;
     }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      border-radius: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      border: 1px solid transparent;
     }
+    .btn-primary { background: var(--red); color: #fff; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(255,59,59,0.35); }
 
-    .skill-card {
-      background: #101010;
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 25px;
-      border-radius: 20px;
-      text-align: center;
+    .social-links { display: flex; gap: 14px; margin-top: 30px; }
+    .social-link {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: #131313;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      color: #cfcfcf;
       transition: 0.3s;
     }
+    .social-link:hover { background: var(--red); color: #fff; border-color: var(--red); transform: translateY(-3px); }
 
-    .skill-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(255,255,255,0.3);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-      gap: 50px;
-      align-items: stretch;
-    }
-
-    .project-card {
-      background: #0f0f0f;
-      border-radius: 30px;
+    .home-img { display: flex; justify-content: center; }
+    .home-img .frame {
+      position: relative;
+      width: 330px;
+      height: 400px;
+      border-radius: 28px;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: 0.4s;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
+      border: 1px solid var(--line);
+      background: linear-gradient(to bottom, #1d1d1d, #090909);
     }
-
-    .project-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(255,255,255,0.2);
+    .home-img .frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.15), transparent 55%);
+      z-index: 2;
+      pointer-events: none;
     }
-
-    .project-card img {
+    .home-img .frame img {
       width: 100%;
-      height: 320px;
+      height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .project-content {
-      padding: 35px;
+    /* ---------------- About ---------------- */
+    .about-intro { max-width: 850px; margin-bottom: 45px; }
+    .about-intro h3 { font-size: 1.6rem; margin-bottom: 18px; }
+    .about-intro h3 span { color: var(--muted); font-weight: 500; }
+    .about-intro p { color: #c7c7c7; line-height: 2; }
+
+    .personal-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+      gap: 14px 30px;
+      margin-bottom: 55px;
+    }
+    .personal-info .info-item p { color: #cfcfcf; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .personal-info .info-item span { color: var(--muted); }
+
+    .about-block-title { font-size: 1.5rem; margin: 10px 0 25px; display: flex; align-items: center; gap: 12px; }
+    .about-block-title i { color: var(--red); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+      gap: 14px;
+      margin-bottom: 60px;
+    }
+    .skill-card {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      padding: 16px 18px;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      transition: 0.3s;
+    }
+    .skill-card:hover { transform: translateY(-4px); border-color: rgba(255,59,59,0.5); color: #fff; }
+
+    .exp-edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 55px; }
+
+    .timeline { position: relative; padding-left: 6px; }
+    .timeline-item {
+      position: relative;
+      padding: 0 0 35px 32px;
+      border-left: 2px solid var(--line);
+    }
+    .timeline-item:last-child { border-left: 2px solid transparent; padding-bottom: 0; }
+    .timeline-item .circle-dot {
+      position: absolute;
+      left: -9px;
+      top: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--red);
+      border: 4px solid #050505;
+      box-shadow: 0 0 0 3px rgba(255,59,59,0.2);
+    }
+    .timeline-date { font-size: 0.82rem; color: var(--muted); margin-bottom: 8px; }
+    .timeline-date i { margin-right: 6px; color: var(--red); }
+    .timeline-title { font-size: 1.15rem; margin-bottom: 4px; }
+    .timeline-org { font-size: 0.9rem; color: #bdbdbd; margin-bottom: 12px; }
+    .timeline-text { color: #b6b6b6; line-height: 1.75; font-size: 0.92rem; }
+    .timeline-text ul { padding-left: 18px; }
+    .timeline-text li { margin-bottom: 6px; }
+
+    /* ---------------- Portfolio ---------------- */
+    .portfolio { display: block; }
+    .portfolio .container { padding: 0; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: 35px;
     }
 
-    .project-content h3 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-    }
-
-    .project-content p {
-      color: #bdbdbd;
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-
-    .tags {
+    .project-card {
+      background: var(--panel);
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      transition: 0.4s;
+      cursor: pointer;
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      flex-direction: column;
+    }
+    .project-card:hover { transform: translateY(-8px); border-color: rgba(255,59,59,0.4); }
+
+    .project-thumb { position: relative; overflow: hidden; }
+    .project-thumb img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+      transition: 0.5s;
+    }
+    .project-card:hover .project-thumb img { transform: scale(1.06); }
+
+    /* Portrait (vertical) project media — show full frame instead of cropping */
+    .project-thumb.portrait { background: #000; }
+    .project-thumb.portrait img { object-fit: contain; }
+    .project-card:hover .project-thumb.portrait img { transform: scale(1.03); }
+    .project-thumb::after {
+      content: '\2197';
+      position: absolute;
+      bottom: 14px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 1.05rem;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: 0.35s;
+    }
+    .project-card:hover .project-thumb::after { opacity: 1; transform: translateY(0); background: var(--red); border-color: var(--red); }
+
+    .project-content { padding: 26px 26px 30px; }
+    .project-content h3 { font-size: 1.4rem; margin-bottom: 6px; }
+    .project-content .project-role { font-size: 0.82rem; color: var(--muted); margin-bottom: 14px; }
+    .project-content .project-excerpt { color: #bdbdbd; line-height: 1.7; font-size: 0.9rem; }
+
+    /* ---------------- Modal ---------------- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-y: auto;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .modal-overlay.open { display: flex; opacity: 1; }
+
+    .modal {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 26px;
+      max-width: 860px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      transform: translateY(20px) scale(0.98);
+      transition: 0.35s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 5;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.55);
+      color: white;
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .modal-close:hover { background: var(--red); color: #fff; border-color: var(--red); transform: rotate(90deg); }
+
+    .modal-media video { width: 100%; height: 380px; object-fit: cover; background: #000; display: block; }
+    .modal-media.portrait video { object-fit: contain; height: 460px; }
+    .modal-gallery.portrait img { object-fit: contain; background: #000; height: 340px; }
+
+    .modal-body { padding: 34px 40px 45px; }
+    .modal-body h2 { font-size: 2.1rem; margin-bottom: 12px; }
+    .modal-body .project-role {
+      background: #151515;
+      padding: 12px 16px;
+      border-left: 4px solid var(--red);
+      border-radius: 10px;
+      margin: 0 0 22px;
+      display: inline-block;
+    }
+    .modal-body > p { color: #cfcfcf; line-height: 1.9; margin-bottom: 25px; }
+    .modal-body h4 { font-size: 1.1rem; margin-bottom: 12px; letter-spacing: 0.5px; }
+    .modal-body ul { padding-left: 20px; line-height: 1.9; color: #c7c7c7; margin-bottom: 30px; }
+    .modal-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .modal-gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 14px; }
+
+    body.modal-open { overflow: hidden; }
+
+    /* ---------------- Animations ---------------- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-14px); }
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
     }
 
-    .tag {
-      background: #171717;
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 10px 16px;
-      border-radius: 30px;
-      font-size: 0.85rem;
+    /* Home entrance (plays on load) */
+    .home-info > * { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+    .home-info .hello       { animation-delay: 0.1s; }
+    .home-info h1           { animation-delay: 0.25s; }
+    .home-info .profession  { animation-delay: 0.4s; }
+    .home-info p            { animation-delay: 0.55s; }
+    .home-info .btn         { animation-delay: 0.7s; }
+    .home-info .social-links{ animation-delay: 0.85s; }
+    .home-img .frame { opacity: 0; animation: scaleIn 0.9s ease 0.3s forwards, floaty 6s ease-in-out 1.2s infinite; }
+
+    /* typing caret */
+    .typing::after {
+      content: '|';
+      margin-left: 2px;
+      color: var(--red);
+      animation: blink 1s step-end infinite;
     }
 
-    .contact {
-      text-align: center;
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal.delay-1 { transition-delay: 0.1s; }
+    .reveal.delay-2 { transition-delay: 0.2s; }
+    .reveal.delay-3 { transition-delay: 0.3s; }
+
+    /* Staggered pop-in for cards */
+    .stagger > * { opacity: 0; transform: translateY(30px); }
+    .stagger.visible > * { animation: fadeUp 0.6s ease forwards; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .home-info > *, .home-img .frame, .reveal, .stagger > * { opacity: 1 !important; transform: none !important; }
     }
 
-    .contact p {
-      color: #bdbdbd;
-      max-width: 700px;
-      margin: 20px auto 40px;
-      line-height: 1.8;
+    /* ---------------- Responsive ---------------- */
+    @media(max-width: 1000px) {
+      .home-grid { grid-template-columns: 1fr; gap: 45px; }
+      .home-img { order: -1; }
+      .exp-edu-grid { grid-template-columns: 1fr; gap: 45px; }
     }
 
-    footer {
-      padding: 40px 0;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      color: #8b8b8b;
+    @media(max-width: 850px) {
+      .aside { left: calc(-1 * var(--sidebar-w)); }
+      .aside.open { left: 0; }
+      .main-content { margin-left: 0; }
+      .nav-toggler { display: flex; }
+      .section-title h2 { font-size: 2.1rem; }
     }
 
-    @media(max-width:1100px) {
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
+    @media(max-width: 600px) {
+      .modal-body { padding: 28px 22px 34px; }
+      .modal-media video { height: 240px; }
+      .modal-gallery { grid-template-columns: 1fr; }
+      .home-img .frame { width: 260px; height: 320px; }
     }
-
-    @media(max-width:768px) {
-      .hero h1 {
-        font-size: 3rem;
-      }
-
-      .section-title h2 {
-        font-size: 2rem;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .project-card img {
-        height: 240px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-    }
-  
-.project-media video{width:100%;height:350px;object-fit:cover;background:#000}
-.project-role{background:#151515;padding:12px;border-left:4px solid #888;border-radius:10px;margin:15px 0}
-.project-gallery{display:flex;justify-content:center;gap:15px;margin:20px auto;max-width:520px}
-.project-gallery img{width:250px;height:140px;object-fit:cover;border-radius:10px}
-.project-content ul{padding-left:20px;line-height:1.8;margin:15px 0}
-</style>
+  </style>
 </head>
 <body>
 
-  <nav>
-    <div class="container nav-content">
-      <div class="logo">Port<span>folio</span></div>
+  <!-- Mobile menu button -->
+  <div class="nav-toggler" id="nav-toggler"><i class="fa fa-bars"></i></div>
 
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        
-      </div>
+  <!-- Sidebar -->
+  <aside class="aside" id="aside">
+    <div class="logo">Udaya <span>Shankar</span></div>
+    <ul class="nav">
+      <li><a href="#home" class="active"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="#about"><i class="fa fa-user"></i> About</a></li>
+      <li><a href="#portfolio"><i class="fa fa-briefcase"></i> Portfolio</a></li>
+    </ul>
+    <div class="side-foot">
+      © 2026 Udaya Shankar<br>Senior Unity Developer
     </div>
-  </nav>
+  </aside>
 
-  <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <h1>Udaya <span>Shankar</span></h1>
+  <div class="main-content">
 
-        <p>
-          Gameplay Programmer and Technical Developer focused on Unity systems,
-          simulations, gameplay mechanics, optimization, shaders, editor tools,
-          and immersive interactive experiences.
-        </p>
-
-        <div class="buttons">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
+    <!-- HOME -->
+    <section class="home" id="home">
+      <div class="container">
+        <div class="home-grid">
+          <div class="home-info">
+            <h3 class="hello">Hello, I'm <span>Udaya Shankar</span></h3>
+            <h3 class="profession">I'm a <span class="typing" id="typing"></span></h3>
+            <p>
+              5+ years of professional experience building games, simulations, and interactive
+              applications using Unity 3D, Unreal Engine, and C#. Specialised in gameplay programming,
+              performance optimization, cross-platform deployment, and scalable architecture.
+            </p>
+            <a href="UdayaShankarResume.pdf" class="btn btn-primary" download>
+              <i class="fa fa-download"></i> Download CV
+            </a>
+            <div class="social-links">
+              <a href="https://linkedin.com/in/uday-shankar-b0703b206" class="social-link" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://github.com/udayashankar1" class="social-link" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="home-img">
+            <div class="frame">
+              <img src="Uday.png" alt="Udaya Shankar">
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      </div>
-    </div>
-  </section>
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="section-title reveal">
+          <p>About Me</p>
+          <h2>Experience &amp; Education</h2>
+        </div>
 
-  <section id="about">
-    <div class="container">
-      <div class="section-title">
-        <p>About Me</p>
-        <h2>Building immersive experiences through gameplay and technology.</h2>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-text">
+        <div class="about-intro reveal">
           <p>
-            I'm UdayaShankar. My journey into game and software development began at Seamedu Pune, where I completed my BCA with a specialization in game development.
-          </p>
-
-          <p>
-            I worked at Vr2ality Pune and later at Immersivevision Technology, contributing to educational and simulation projects like Simulab and Cadaviz.
+            I build high-quality games, simulations, and interactive applications with Unity 3D, Unreal Engine,
+            and C#. My work spans gameplay programming, performance optimization, cross-platform deployment
+            (Android, iOS, WebGL, Windows), custom editor tooling, CI/CD pipelines, and scalable architecture
+            using MVC, MVP, and event-driven design. I'm enthusiastic about AR/VR, real-time simulations, and
+            emerging game-development technologies, and I enjoy mentoring junior developers.
           </p>
         </div>
 
-        <div class="about-text">
-          <p>
-            My expertise includes gameplay programming, parkour mechanics, optimization, shaders, editor tools, AI systems, and simulation frameworks.
-          </p>
+        <div class="personal-info reveal">
+          <div class="info-item"><p>Email: <span>sudaya75@gmail.com</span></p></div>
+          <div class="info-item"><p>Phone: <span>+91 82913 00611</span></p></div>
+          <div class="info-item"><p>Location: <span>Panvel, Maharashtra</span></p></div>
+          <div class="info-item"><p>Experience: <span>5+ Years</span></p></div>
+        </div>
 
-          <p>
-            I enjoy analyzing gameplay systems deeply and creating immersive mechanics that combine creativity with strong technical execution.
-          </p>
+        <h3 class="about-block-title reveal"><i class="fa fa-code"></i> Skills</h3>
+        <div class="skills-grid stagger reveal">
+          <div class="skill-card">Unity (2D / 3D / URP / HDRP)</div>
+          <div class="skill-card">Advanced C# &amp; OOP</div>
+          <div class="skill-card">Unreal Engine 5 (Blueprints &amp; C++)</div>
+          <div class="skill-card">C++ &amp; Python</div>
+          <div class="skill-card">Addressables &amp; Asset Bundles</div>
+          <div class="skill-card">Async (UniTask / Async-Await)</div>
+          <div class="skill-card">SOLID &amp; ScriptableObjects</div>
+          <div class="skill-card">Design Patterns (MVC / MVP / FSM)</div>
+          <div class="skill-card">Multi-Platform (Android / iOS / WebGL / PC)</div>
+          <div class="skill-card">CI/CD (Cloud Build / GitHub Actions)</div>
+          <div class="skill-card">Profiling &amp; GPU Optimization</div>
+          <div class="skill-card">XR (AR / VR / Mixed Reality)</div>
+          <div class="skill-card">Custom Unity Editor Tooling</div>
+          <div class="skill-card">DOTS / ECS / Burst</div>
+          <div class="skill-card">Shader Graph &amp; HLSL / GLSL</div>
+          <div class="skill-card">AI-Assisted Development</div>
+        </div>
+
+        <div class="exp-edu-grid">
+          <div class="experience reveal">
+            <h3 class="about-block-title"><i class="fa fa-briefcase"></i> Experience</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="circle-dot"></div>
+                <p class="timeline-date"><i class="fa fa-calendar"></i> Dec 2021 – Mar 2026</p>
+                <h4 class="timeline-title">Senior Unity Developer</h4>
+                <p class="timeline-org">Immersivevision Technology — Pune, India</p>
+                <div class="timeline-text">
+                  <ul>
+                    <li>Architected async content pipelines using UniTask and Addressables, improving memory efficiency.</li>
+                    <li>Reduced draw calls and memory footprint by up to 35% via atlasing, GPU instancing, pooling, and batching.</li>
+                    <li>Authored Shader Graph and custom HLSL shaders within mobile GPU performance budgets.</li>
+                    <li>Built XR experiences for Meta Quest and mobile AR using AR Foundation, XR Toolkit, and OpenXR.</li>
+                    <li>Developed custom Editor tooling, cutting team development time by ~30%.</li>
+                    <li>Engineered multi-platform CI/CD build pipelines and mentored junior developers.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="circle-dot"></div>
+                <p class="timeline-date"><i class="fa fa-calendar"></i> Feb 2021 – Sep 2021</p>
+                <h4 class="timeline-title">Game Developer</h4>
+                <p class="timeline-org">Vr2ality — Pune, India</p>
+                <div class="timeline-text">
+                  <ul>
+                    <li>Developed 10+ educational games for the CBSE curriculum in Unity.</li>
+                    <li>Built endless runners, survival, drag-and-drop, and collection games with dynamically updatable quizzes via Asset Bundles.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="education reveal delay-2">
+            <h3 class="about-block-title"><i class="fa fa-graduation-cap"></i> Education</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="circle-dot"></div>
+                <p class="timeline-date"><i class="fa fa-calendar"></i> Jun 2018 – Aug 2021</p>
+                <h4 class="timeline-title">Bachelor in Computer Application</h4>
+                <p class="timeline-org">Seamedu School of Pro-Expressionism — Pune, India</p>
+                <div class="timeline-text">
+                  Specialised in game development, building a strong foundation in programming, computer science
+                  fundamentals, and interactive application development.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="skills">
-    <div class="container">
-      <div class="section-title">
-        <p>Skills</p>
-        <h2>Technical Expertise</h2>
+    <!-- PORTFOLIO -->
+    <section class="portfolio" id="portfolio">
+      <div class="container">
+        <div class="section-title reveal">
+          <p>Portfolio</p>
+          <h2>Featured Work</h2>
+        </div>
+        <div class="projects-grid stagger reveal" id="projects-grid"></div>
       </div>
+    </section>
 
-      <div class="skills-grid">
-        <div class="skill-card">Unity 2D & 3D</div>
-        <div class="skill-card">Unreal Blueprints</div>
-        <div class="skill-card">C#</div>
-        <div class="skill-card">Python</div>
-        <div class="skill-card">Gameplay Programming</div>
-        <div class="skill-card">Optimization</div>
-        <div class="skill-card">Editor Tools</div>
-        <div class="skill-card">Shaders</div>
-        <div class="skill-card">Animation Systems</div>
-        <div class="skill-card">Git & SVN</div>
-      </div>
-    </div>
-  </section>
+  </div>
 
-  <section id="projects">
-    <div class="container">
-      <div class="section-title">
-        <p>Projects</p>
-        <h2>Featured Work</h2>
+  <!-- Project detail modal (opens in-page) -->
+  <div class="modal-overlay" id="project-modal">
+    <div class="modal">
+      <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-media">
+        <video id="modal-video" muted loop playsinline></video>
       </div>
-
-      <div class="projects-grid">
-    <div class="project-card">
-      <div class="project-media">
-        <video class="project-video" autoplay muted loop playsinline poster="Images/Cadaviz 1.png">
-          <source src="Videos/Cadaviz.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="project-content">
-        <h3>Cadaviz</h3>
-        <div class="project-role"><strong>Role:</strong> Senior Developer</div>
-        <p>Collaborated with doctors, subject matter experts, and 3D artists to create an immersive anatomy learning platform featuring advanced dissection tools, student progress tracking, annotations, drawing systems, and heavily optimized medical assets for real-time interaction.</p>
+      <div class="modal-body">
+        <h2 id="modal-title"></h2>
+        <div class="project-role" id="modal-role"></div>
+        <p id="modal-desc"></p>
         <h4>Key Contributions</h4>
-        <ul><li>Developed a modular anatomy interaction framework using Scriptable Objects.</li><li>Implemented a custom layer-based dissection system with dynamic mesh visibility.</li><li>Built an event-driven architecture using the Observer Pattern.</li><li>Optimized memory usage through Addressables and on-demand asset loading.</li><li>Created reusable interaction systems for highlighting, annotations, and selection.</li><li>Reduced rendering overhead using batching, texture optimization, and LODs.</li></ul>
-        <div class="project-gallery">
-          <img src="Images/Cadaviz 1.png">
-          <img src="Images/Cadaviz 2.png"></div>
-
+        <ul id="modal-list"></ul>
+        <div class="modal-gallery" id="modal-gallery"></div>
       </div>
     </div>
-
-    <div class="project-card">
-      <div class="project-media">
-        <video class="project-video" autoplay muted loop playsinline poster="Images/Simulab 1.png">
-          <source src="Videos/Simulab.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="project-content">
-        <h3>Simulab</h3>
-        <div class="project-role"><strong>Role:</strong> Senior Developer</div>
-        <p>Led development of a reusable educational simulation framework supporting chemistry, physics, and biology experiments with fluid simulation, circuitry systems, APIs, and save/load architecture across more than 30 virtual laboratories.</p>
-        <h4>Key Contributions</h4>
-        <ul><li>Architected a reusable experiment framework using Scriptable Objects and Factory Pattern.</li><li>Implemented a modular save/load system for experiment persistence.</li><li>Designed a data-driven experiment configuration pipeline.</li><li>Developed simulation systems for fluids, circuits, and educational mechanics.</li><li>Integrated REST APIs for analytics and user synchronization.</li><li>Created reusable UI architecture following MVC/MVVM-inspired patterns.</li></ul>
-        <div class="project-gallery">
-          <img src="Images/Simulab 1.png">
-          <img src="Images/Simulab 2.png"></div>
-
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-media">
-        <video class="project-video" autoplay muted loop playsinline poster="Images/Car Simulation 1.png">
-          <source src="Videos/Car Simulation.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="project-content">
-        <h3>Car Simulation</h3>
-        <div class="project-role"><strong>Role:</strong> Developer (Personal Project)</div>
-        <p>A fully custom vehicle simulation created without Unity Wheel Colliders, featuring configurable handling, acceleration, braking, traction, and realistic driving behavior.</p>
-        <h4>Key Contributions</h4>
-        <ul><li>Developed a custom vehicle physics controller.</li><li>Implemented acceleration, braking, steering, and drag calculations.</li><li>Applied mathematical vehicle simulation principles.</li><li>Designed configurable vehicle parameters using Scriptable Objects.</li><li>Created debugging and telemetry tools for tuning.</li></ul>
-        <div class="project-gallery">
-          <img src="Images/Car Simulation 1.png">
-          <img src="Images/Car Simulation 2.png"></div>
-
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-media">
-        <video class="project-video" autoplay muted loop playsinline poster="Images/Parkour Simulation 1.png">
-          <source src="Videos/Parkour Simulation.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="project-content">
-        <h3>Parkour Simulation</h3>
-        <div class="project-role"><strong>Role:</strong> Developer (Personal Project)</div>
-        <p>A reusable parkour and traversal framework featuring vaulting, climbing, ledge interactions, target matching, and animation-driven movement systems.</p>
-        <h4>Key Contributions</h4>
-        <ul><li>Implemented animation-driven movement using Animation Events and Target Matching.</li><li>Built a character state machine for traversal transitions.</li><li>Developed modular detection systems using raycasts and physics queries.</li><li>Applied the Strategy Pattern for extensible traversal actions.</li></ul>
-        <div class="project-gallery">
-          <img src="Images/Parkour Simulation 1.png">
-          <img src="Images/Parkour Simulation 2.png"></div>
-
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-media">
-        <video class="project-video" autoplay muted loop playsinline poster="Images/Bounty Punk 1.png">
-          <source src="Videos/Bounty Punk.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="project-content">
-        <h3>Bounty Punk</h3>
-        <div class="project-role"><strong>Role:</strong> Developer / Designer / 3D Artist</div>
-        <p>A top-down futuristic shooter developed as a two-person project where we created the gameplay systems, models, lighting, shaders, audio, and combat experience from the ground up.</p>
-        <h4>Key Contributions</h4>
-        <ul><li>Built gameplay systems using a modular state machine architecture.</li><li>Developed object pooling systems to reduce runtime allocations.</li><li>Implemented custom shader effects and VFX integration.</li><li>Created scalable weapon and enemy configuration systems using Scriptable Objects.</li><li>Optimized gameplay performance through profiling and asset management.</li></ul>
-        <div class="project-gallery">
-          <img src="Images/Bounty Punk 1.png">
-          <img src="Images/Bounty Punk 2.png"></div>
-
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-media">
-        <video class="project-video" autoplay muted loop playsinline poster="Images/Wolf Stealth 1.png">
-          <source src="Videos/Wolf Stealth.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="project-content">
-        <h3>Wolf Stealth</h3>
-        <div class="project-role"><strong>Role:</strong> Developer (Team Project)</div>
-        <p>A stealth-focused top-down experience where players survive as a werewolf by using environmental noise, avoiding zombie detection, and completing objectives in a dynamic dark environment.</p>
-        <h4>Key Contributions</h4>
-        <ul><li>Designed an AI perception framework combining sound and vision detection.</li><li>Implemented enemy AI using Finite State Machines.</li><li>Created a dynamic noise generation system driven by gameplay events.</li><li>Built reusable interaction systems for keys, doors, and objectives.</li><li>Configured AI behavior through Scriptable Objects.</li></ul>
-        <div class="project-gallery">
-          <img src="Images/Wolf Stealth 1.png">
-          <img src="Images/Wolf Stealth 2.png"></div>
-
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-media">
-        <video class="project-video" autoplay muted loop playsinline poster="Images/The Invasion 1.png">
-          <source src="Videos/The Invasion.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="project-content">
-        <h3>The Invasion</h3>
-        <div class="project-role"><strong>Role:</strong> Developer / 2D Artist</div>
-        <p>A 2D platformer featuring alien combat, progression systems, collectible persistence, enemy AI, and handcrafted levels built around challenging gameplay scenarios.</p>
-        <h4>Key Contributions</h4>
-        <ul><li>Developed reusable 2D enemy AI with patrol and pursuit behaviors.</li><li>Implemented a persistent collectible tracking system.</li><li>Created a modular checkpoint and respawn framework.</li><li>Designed data-driven level configurations using Scriptable Objects.</li><li>Optimized performance through pooling and event-driven systems.</li></ul>
-        <div class="project-gallery">
-          <img src="Images/The Invasion 1.png">
-          <img src="Images/The Invasion 2.png"></div>
-
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-media">
-        <video class="project-video" autoplay muted loop playsinline poster="Images/Grammar Fishing 1.png">
-          <source src="Videos/Grammar Fishing.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="project-content">
-        <h3>Grammar Fishing</h3>
-        <div class="project-role"><strong>Role:</strong> Junior Developer</div>
-        <p>An educational fishing game where players catch the correct answers from a pond while progressing through dynamically generated questions.</p>
-        <h4>Key Contributions</h4>
-        <ul><li>Built a data-driven question management system using Scriptable Objects.</li><li>Separated educational content from gameplay mechanics.</li><li>Created dynamic content loading and validation systems.</li><li>Developed scalable UI workflows for educational experiences.</li></ul>
-        <div class="project-gallery">
-          <img src="Images/Grammar Fishing 1.png">
-          <img src="Images/Grammar Fishing 2.png"></div>
-
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-media">
-        <video class="project-video" autoplay muted loop playsinline poster="Images/Quiz Driver 1.png">
-          <source src="Videos/Quiz Driver.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="project-content">
-        <h3>Quiz Driver</h3>
-        <div class="project-role"><strong>Role:</strong> Junior Developer</div>
-        <p>An endless driving game that combines quiz-based learning with collectibles, power-ups, progression systems, and answer-based gameplay decisions.</p>
-        <h4>Key Contributions</h4>
-        <ul><li>Developed an endless-runner architecture with procedural spawning.</li><li>Implemented weighted spawning algorithms for gameplay elements.</li><li>Built reusable scoring, life, and progression systems.</li><li>Utilized object pooling for stable long-session performance.</li></ul>
-        <div class="project-gallery">
-          <img src="Images/Quiz Driver 1.png">
-          <img src="Images/Quiz Driver 2.png"></div>
-
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-media">
-        <video class="project-video" autoplay muted loop playsinline poster="Images/Block Breaker 1.png">
-          <source src="Videos/Block Breaker.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="project-content">
-        <h3>Block Breaker</h3>
-        <div class="project-role"><strong>Role:</strong> Developer (Personal Project)</div>
-        <p>A modern take on the classic block breaker formula featuring multi-stage block destruction, visual feedback systems, and progression across levels.</p>
-        <h4>Key Contributions</h4>
-        <ul><li>Designed a modular block system using inheritance and Scriptable Objects.</li><li>Implemented collision-based damage and visual state progression.</li><li>Built reusable level-loading architecture.</li><li>Optimized gameplay updates using event-driven systems.</li></ul>
-        <div class="project-gallery">
-          <img src="Images/Block Breaker 1.png">
-          <img src="Images/Block Breaker 2.png"></div>
-
-      </div>
-    </div>
-    </div></div></div></section>
-
-  
-
-  <footer>
-    © 2026 UdayaShankar • Portfolio Website
-  </footer>
-
+  </div>
 
 <script>
-const videos=document.querySelectorAll('.project-video');
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){entry.target.play();}
-else{entry.target.pause();}
+const projects = [
+  {
+    title: "Cadaviz",
+    role: "Senior Developer",
+    video: "Videos/Cadaviz.mp4",
+    images: ["Images/Cadaviz 1.png", "Images/Cadaviz 2.png"],
+    desc: "Collaborated with doctors, subject matter experts, and 3D artists to create an immersive anatomy learning platform featuring advanced dissection tools, student progress tracking, annotations, drawing systems, and heavily optimized medical assets for real-time interaction.",
+    contributions: [
+      "Developed a modular anatomy interaction framework using Scriptable Objects.",
+      "Implemented a custom layer-based dissection system with dynamic mesh visibility.",
+      "Built an event-driven architecture using the Observer Pattern.",
+      "Optimized memory usage through Addressables and on-demand asset loading.",
+      "Created reusable interaction systems for highlighting, annotations, and selection.",
+      "Reduced rendering overhead using batching, texture optimization, and LODs."
+    ]
+  },
+  {
+    title: "Simulab",
+    role: "Senior Developer",
+    video: "Videos/Simulab.mp4",
+    images: ["Images/Simulab 1.png", "Images/Simulab 2.png"],
+    desc: "Led development of a reusable educational simulation framework supporting chemistry, physics, and biology experiments with fluid simulation, circuitry systems, APIs, and save/load architecture across more than 30 virtual laboratories.",
+    contributions: [
+      "Architected a reusable experiment framework using Scriptable Objects and Factory Pattern.",
+      "Implemented a modular save/load system for experiment persistence.",
+      "Designed a data-driven experiment configuration pipeline.",
+      "Developed simulation systems for fluids, circuits, and educational mechanics.",
+      "Integrated REST APIs for analytics and user synchronization.",
+      "Created reusable UI architecture following MVC/MVVM-inspired patterns."
+    ]
+  },
+  {
+    title: "Car Simulation",
+    role: "Developer (Personal Project)",
+    video: "Videos/Car Simulation.mp4",
+    images: ["Images/Car Simulation 1.png", "Images/Car Simulation 2.png"],
+    desc: "A fully custom vehicle simulation created without Unity Wheel Colliders, featuring configurable handling, acceleration, braking, traction, and realistic driving behavior.",
+    contributions: [
+      "Developed a custom vehicle physics controller.",
+      "Implemented acceleration, braking, steering, and drag calculations.",
+      "Applied mathematical vehicle simulation principles.",
+      "Designed configurable vehicle parameters using Scriptable Objects.",
+      "Created debugging and telemetry tools for tuning."
+    ]
+  },
+  {
+    title: "Parkour Simulation",
+    role: "Developer (Personal Project)",
+    video: "Videos/Parkour Simulation.mp4",
+    images: ["Images/Parkour Simulation 1.png", "Images/Parkour Simulation 2.png"],
+    desc: "A reusable parkour and traversal framework featuring vaulting, climbing, ledge interactions, target matching, and animation-driven movement systems.",
+    contributions: [
+      "Implemented animation-driven movement using Animation Events and Target Matching.",
+      "Built a character state machine for traversal transitions.",
+      "Developed modular detection systems using raycasts and physics queries.",
+      "Applied the Strategy Pattern for extensible traversal actions."
+    ]
+  },
+  {
+    title: "Bounty Punk",
+    role: "Developer / Designer / 3D Artist",
+    video: "Videos/Bounty Punk.mp4",
+    images: ["Images/Bounty Punk 1.png", "Images/Bounty Punk 2.png"],
+    desc: "A top-down futuristic shooter developed as a two-person project where we created the gameplay systems, models, lighting, shaders, audio, and combat experience from the ground up.",
+    contributions: [
+      "Built gameplay systems using a modular state machine architecture.",
+      "Developed object pooling systems to reduce runtime allocations.",
+      "Implemented custom shader effects and VFX integration.",
+      "Created scalable weapon and enemy configuration systems using Scriptable Objects.",
+      "Optimized gameplay performance through profiling and asset management."
+    ]
+  },
+  {
+    title: "Wolf Stealth",
+    role: "Developer (Team Project)",
+    video: "Videos/Wolf Stealth.mp4",
+    images: ["Images/Wolf Stealth 1.png", "Images/Wolf Stealth 2.png"],
+    desc: "A stealth-focused top-down experience where players survive as a werewolf by using environmental noise, avoiding zombie detection, and completing objectives in a dynamic dark environment.",
+    contributions: [
+      "Designed an AI perception framework combining sound and vision detection.",
+      "Implemented enemy AI using Finite State Machines.",
+      "Created a dynamic noise generation system driven by gameplay events.",
+      "Built reusable interaction systems for keys, doors, and objectives.",
+      "Configured AI behavior through Scriptable Objects."
+    ]
+  },
+  {
+    title: "The Invasion",
+    role: "Developer / 2D Artist",
+    video: "Videos/The Invasion.mp4",
+    images: ["Images/The Invasion 1.png", "Images/The Invasion 2.png"],
+    desc: "A 2D platformer featuring alien combat, progression systems, collectible persistence, enemy AI, and handcrafted levels built around challenging gameplay scenarios.",
+    contributions: [
+      "Developed reusable 2D enemy AI with patrol and pursuit behaviors.",
+      "Implemented a persistent collectible tracking system.",
+      "Created a modular checkpoint and respawn framework.",
+      "Designed data-driven level configurations using Scriptable Objects.",
+      "Optimized performance through pooling and event-driven systems."
+    ]
+  },
+  {
+    title: "Grammar Fishing",
+    role: "Junior Developer",
+    portrait: true,
+    video: "Videos/Grammar Fishing.mp4",
+    images: ["Images/Grammar Fishing 1.png", "Images/Grammar Fishing 2.png"],
+    desc: "An educational fishing game where players catch the correct answers from a pond while progressing through dynamically generated questions.",
+    contributions: [
+      "Built a data-driven question management system using Scriptable Objects.",
+      "Separated educational content from gameplay mechanics.",
+      "Created dynamic content loading and validation systems.",
+      "Developed scalable UI workflows for educational experiences."
+    ]
+  },
+  {
+    title: "Quiz Driver",
+    role: "Junior Developer",
+    portrait: true,
+    video: "Videos/Quiz Driver.mp4",
+    images: ["Images/Quiz Driver 1.png", "Images/Quiz Driver 2.png"],
+    desc: "An endless driving game that combines quiz-based learning with collectibles, power-ups, progression systems, and answer-based gameplay decisions.",
+    contributions: [
+      "Developed an endless-runner architecture with procedural spawning.",
+      "Implemented weighted spawning algorithms for gameplay elements.",
+      "Built reusable scoring, life, and progression systems.",
+      "Utilized object pooling for stable long-session performance."
+    ]
+  },
+  {
+    title: "Block Breaker",
+    role: "Developer (Personal Project)",
+    video: "Videos/Block Breaker.mp4",
+    images: ["Images/Block Breaker 1.png", "Images/Block Breaker 2.png"],
+    desc: "A modern take on the classic block breaker formula featuring multi-stage block destruction, visual feedback systems, and progression across levels.",
+    contributions: [
+      "Designed a modular block system using inheritance and Scriptable Objects.",
+      "Implemented collision-based damage and visual state progression.",
+      "Built reusable level-loading architecture.",
+      "Optimized gameplay updates using event-driven systems."
+    ]
+  }
+];
+
+// ---- Build the projects grid ----
+const grid = document.getElementById('projects-grid');
+projects.forEach((p, i) => {
+  const card = document.createElement('div');
+  card.className = 'project-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.innerHTML = `
+    <div class="project-thumb${p.portrait ? ' portrait' : ''}">
+      <img src="${p.images[0]}" alt="${p.title}" loading="lazy">
+    </div>
+    <div class="project-content">
+      <h3>${p.title}</h3>
+      <div class="project-role">${p.role}</div>
+      <p class="project-excerpt">${p.desc}</p>
+    </div>`;
+  card.addEventListener('click', () => openModal(i));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(i); }
+  });
+  grid.appendChild(card);
 });
-},{threshold:0.4});
-videos.forEach(v=>observer.observe(v));
+
+// ---- Modal logic ----
+const overlay   = document.getElementById('project-modal');
+const modalVid  = document.getElementById('modal-video');
+const modalTtl  = document.getElementById('modal-title');
+const modalRole = document.getElementById('modal-role');
+const modalDesc = document.getElementById('modal-desc');
+const modalList = document.getElementById('modal-list');
+const modalGal  = document.getElementById('modal-gallery');
+
+function openModal(i) {
+  const p = projects[i];
+  modalTtl.textContent  = p.title;
+  modalRole.innerHTML   = '<strong>Role:</strong> ' + p.role;
+  modalDesc.textContent = p.desc;
+  modalList.innerHTML   = p.contributions.map(c => `<li>${c}</li>`).join('');
+  modalGal.innerHTML    = p.images.map(img => `<img src="${img}" alt="${p.title}">`).join('');
+  document.querySelector('.modal-media').classList.toggle('portrait', !!p.portrait);
+  modalGal.classList.toggle('portrait', !!p.portrait);
+  modalVid.src = p.video;
+  overlay.classList.add('open');
+  document.body.classList.add('modal-open');
+  modalVid.play().catch(() => {});
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.classList.remove('modal-open');
+  modalVid.pause();
+  modalVid.removeAttribute('src');
+  modalVid.load();
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ---- Sidebar: mobile toggle + active link on scroll ----
+const aside = document.getElementById('aside');
+const toggler = document.getElementById('nav-toggler');
+const navLinks = document.querySelectorAll('.aside .nav a');
+
+toggler.addEventListener('click', () => aside.classList.toggle('open'));
+
+navLinks.forEach(link => link.addEventListener('click', () => {
+  navLinks.forEach(l => l.classList.remove('active'));
+  link.classList.add('active');
+  if (window.innerWidth <= 850) aside.classList.remove('open');
+}));
+
+const sections = document.querySelectorAll('section[id]');
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { threshold: 0.5 });
+sections.forEach(s => spy.observe(s));
+
+// ---- Reveal on scroll (fade-up + staggered children) ----
+document.querySelectorAll('.stagger').forEach(group => {
+  [...group.children].forEach((child, i) => {
+    child.style.animationDelay = (i * 0.07) + 's';
+  });
+});
+
+const revealObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ---- Typing effect ----
+const typingEl = document.getElementById('typing');
+if (typingEl) {
+  const roles = ['Senior Unity Developer', 'Game Developer', 'Pipeline Developer'];
+  let roleIndex = 0, charIndex = 0, deleting = false;
+  (function type() {
+    const current = roles[roleIndex];
+    typingEl.textContent = current.slice(0, charIndex);
+    if (!deleting && charIndex < current.length) {
+      charIndex++;
+      setTimeout(type, 90);
+    } else if (deleting && charIndex > 0) {
+      charIndex--;
+      setTimeout(type, 45);
+    } else {
+      if (!deleting) { deleting = true; setTimeout(type, 1600); }
+      else { deleting = false; roleIndex = (roleIndex + 1) % roles.length; setTimeout(type, 350); }
+    }
+  })();
+}
 </script>
 </body>
-
 </html>
